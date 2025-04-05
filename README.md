@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OnlyHuman Forum
 
-## Getting Started
+A forum application built with Next.js and Supabase, focused on providing a platform for verified human users.
 
-First, run the development server:
+## Features
 
+- 🔐 User Authentication
+  - Supabase Auth-based authentication
+  - Access restricted to verified users only
+
+- 📝 Post Features
+  - Create new posts
+  - View post list
+  - View post details
+  - Like functionality
+
+- 💬 Comment System
+  - Post comments on articles
+  - Real-time comment display
+
+- 🎨 Modern Interface
+  - Responsive design
+  - Clear navigation
+  - Elegant typography
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js 14
+- **Styling Solution**: Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Deployment**: Vercel
+
+## Core Modules
+
+### Home Page
+- Display forum title and login button
+- Show post list
+- Each post shows title, publish time, and like count
+
+### Post Detail Page
+- Display full post content
+- Like functionality
+- Comment system
+- Back to home button
+
+### Create Post Page
+- Post title input
+- Post content editor
+- Publish functionality
+
+## Development Setup
+
+1. Clone the project
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [repository-url]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Environment Variables
+Create `.env.local` file and add the following variables:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start development server
+```bash
+npm run dev
+```
 
-## Learn More
+## Database Structure
 
-To learn more about Next.js, take a look at the following resources:
+### posts table
+- id: UUID
+- title: text
+- content: text
+- nullifier_hash: text
+- created_at: timestamp
+- likes: integer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### comments table
+- id: UUID
+- post_id: UUID (foreign key)
+- content: text
+- nullifier_hash: text
+- created_at: timestamp
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### likes table
+- id: UUID
+- post_id: UUID (foreign key)
+- nullifier_hash: text
+- created_at: timestamp
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Pull requests and issues are welcome to help improve the project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT License
